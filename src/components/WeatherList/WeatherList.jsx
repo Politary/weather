@@ -2,45 +2,54 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { WeatherWrapper } from './WeatherList.styles';
+import { useDispatch, useSelector } from 'react-redux';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
+import { SearchButton } from '../SearchButton/SearchButton';
+
+import { weatherSubmit } from '../../store/main/main.actions';
 
 export const WeatherList = () => {
+    const dispatch = useDispatch();
+    const location = useSelector((state) => state.main.location);
     const [data, setData] = useState({});
-    const [location, setLocation] = useState({
-        name: '',
-        weather: '',
-        weatherIcon: '',
-        currentTemp: '',
-        feelsLike: '',
-        windSpeed: '',
-    });
+    const [inputValue, setInputValue] = useState('Moscow');
 
-    const handleClick = async () => {
-        console.log('click');
-        const newData = await axios.get(
-            `http://api.openweathermap.org/data/2.5/forecast?q=Moscow&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
-        );
-        await setLocation({
-            name: newData.data.city.name,
-            weather: newData.data.list[0].weather[0].main,
-            weatherIcon: newData.data.list[0].weather[0].icon,
-            currentTemp: newData.data.list[0].main.temp,
-            feelsLike: newData.data.list[0].main.feels_like,
-            windSpeed: newData.data.list[0].wind.speed,
-            isLoaded: true,
-        });
-        await setData(newData);
+    const handleSearch = async () => {
+        if (inputValue) {
+            console.log('click');
+            const newData = await axios.get(
+                `http://api.openweathermap.org/data/2.5/forecast?q=${inputValue}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
+            );
+            await dispatch(
+                weatherSubmit({
+                    name: newData.data.city.name,
+                    weather: newData.data.list[0].weather[0].main,
+                    weatherIcon: newData.data.list[0].weather[0].icon,
+                    currentTemp: newData.data.list[0].main.temp,
+                    feelsLike: newData.data.list[0].main.feels_like,
+                    windSpeed: newData.data.list[0].wind.speed,
+                    isLoaded: true,
+                })
+            );
+            await setData(newData);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
     };
 
     useEffect(() => {
-        console.log(location);
         console.log(data);
-    }, [location]);
+        console.log(inputValue);
+    }, [location, inputValue]);
 
     return (
         <div>
-            <SearchBar />
-            <button onClick={handleClick}>click</button>
+            <SearchBar handleInputChange={handleInputChange} />
+            <SearchButton handleSearch={handleSearch} inputValue={inputValue}>
+                Search
+            </SearchButton>
             <WeatherWrapper isLoaded={location.isLoaded}>
                 <WeatherCard location={location} />
             </WeatherWrapper>
