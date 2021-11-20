@@ -1,7 +1,6 @@
-import { createStore, compose } from 'redux';
-import { rootReducer } from './root.reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import weatherReducer from './main/main.reducers';
 
-export const store = createStore(
-    rootReducer,
-    compose(window.devToolsExtension ? window.devToolsExtension() : (f) => f)
-);
+export const store = configureStore({
+    reducer: { weatherReducer },
+});

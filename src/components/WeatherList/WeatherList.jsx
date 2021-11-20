@@ -6,12 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
 
-import { weatherSubmit } from '../../store/main/main.actions';
+// import { weatherSubmit } from '../../store/main/main.actions';
+import { weatherSubmit } from '../../store/main/main.reducers';
 
 export const WeatherList = () => {
     const dispatch = useDispatch();
-    const location = useSelector((state) => state.main.location);
-    const [data, setData] = useState({});
+    const location = useSelector((state) => state.weatherReducer.location);
     const [inputValue, setInputValue] = useState('Moscow');
 
     const handleSearch = async () => {
@@ -31,7 +31,6 @@ export const WeatherList = () => {
                     isLoaded: true,
                 })
             );
-            await setData(newData);
         }
     };
 
@@ -40,8 +39,7 @@ export const WeatherList = () => {
     };
 
     useEffect(() => {
-        console.log(data);
-        console.log(inputValue);
+        console.log(location);
     }, [location, inputValue]);
 
     return (

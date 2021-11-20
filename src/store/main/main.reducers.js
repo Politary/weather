@@ -1,4 +1,4 @@
-import { WEATHER_SUBMIT } from './main.actions';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     location: {
@@ -12,16 +12,17 @@ const initialState = {
     },
 };
 
-const handleWeatherSubmit = (state, action) => {
-    console.log(action.payload);
-    return { ...state, location: action.payload };
-};
+export const weatherSlice = createSlice({
+    name: 'weather',
+    initialState,
+    reducers: {
+        weatherSubmit: (state, action) => {
+            console.log(action.payload);
+            return { ...state, location: action.payload };
+        },
+    },
+});
 
-export const weatherReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case WEATHER_SUBMIT:
-            return handleWeatherSubmit(state, action);
-        default:
-            return state;
-    }
-};
+export const { weatherSubmit } = weatherSlice.actions;
+
+export default weatherSlice.reducer;
