@@ -17,8 +17,7 @@ export const weatherSlice = createSlice({
     initialState,
     reducers: {
         weatherSubmit: (state, action) => {
-            console.log(action.payload);
-            return { ...state, location: action.payload };
+            return { location: action.payload };
         },
     },
 });

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
 
-// import { weatherSubmit } from '../../store/main/main.actions';
 import { weatherSubmit } from '../../store/main/main.reducers';
 
 export const WeatherList = () => {
