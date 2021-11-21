@@ -5,7 +5,7 @@ export const SearchBar = ({ handleInputChange }) => {
     return (
         <StyledSearchBar
             type="text"
-            placeholder="type city name"
+            placeholder="Search by city name"
             onChange={handleInputChange}
             defaultValue="Moscow"
         />

@@ -1,36 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { SearchBar } from '../SearchBar/SearchBar';
-import { WeatherWrapper } from './WeatherList.styles';
+import {
+    ErrorWrapper,
+    SearchWrapper,
+    WeatherWrapper,
+} from './WeatherList.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
+import Error from '../../images/icons/Error.svg';
 
-import { weatherSubmit } from '../../store/main/main.reducers';
+import { getWeatherFetch } from '../../store/main/main.slice';
 
 export const WeatherList = () => {
     const dispatch = useDispatch();
-    const location = useSelector((state) => state.weatherReducer.location);
+    const weather = useSelector((state) => state.weather);
     const [inputValue, setInputValue] = useState('Moscow');
 
-    const handleSearch = async () => {
-        if (inputValue) {
-            console.log('click');
-            const newData = await axios.get(
-                `http://api.openweathermap.org/data/2.5/forecast?q=${inputValue}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
-            );
-            await dispatch(
-                weatherSubmit({
-                    name: newData.data.city.name,
-                    weather: newData.data.list[0].weather[0].main,
-                    weatherIcon: newData.data.list[0].weather[0].icon,
-                    currentTemp: newData.data.list[0].main.temp,
-                    feelsLike: newData.data.list[0].main.feels_like,
-                    windSpeed: newData.data.list[0].wind.speed,
-                    isLoaded: true,
-                })
-            );
-        }
+    const handleSearch = () => {
+        dispatch(getWeatherFetch(inputValue));
     };
 
     const handleInputChange = (e) => {
@@ -38,18 +26,28 @@ export const WeatherList = () => {
     };
 
     useEffect(() => {
-        console.log(location);
-    }, [location, inputValue]);
+        console.log(weather.location.name);
+    }, [weather.location, inputValue]);
 
     return (
         <div>
-            <SearchBar handleInputChange={handleInputChange} />
-            <SearchButton handleSearch={handleSearch} inputValue={inputValue}>
-                Search
-            </SearchButton>
-            <WeatherWrapper isLoaded={location.isLoaded}>
-                <WeatherCard location={location} />
-            </WeatherWrapper>
+            <SearchWrapper>
+                <SearchBar handleInputChange={handleInputChange} />
+                <SearchButton handleSearch={handleSearch}>Search</SearchButton>
+            </SearchWrapper>
+            {!weather.isError ? (
+                <WeatherWrapper
+                    name={weather.location.name}
+                    isLoading={weather.location.isLoading}
+                >
+                    <WeatherCard location={weather.location} />
+                </WeatherWrapper>
+            ) : (
+                <ErrorWrapper>
+                    <img src={Error} alt="error" />
+                    <span>Sorry, there is no such city</span>
+                </ErrorWrapper>
+            )}
         </div>
     );
 };

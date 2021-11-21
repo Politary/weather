@@ -1,6 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import weatherReducer from './main/main.reducers';
+import createSagaMiddleware from 'redux-saga';
+import weatherSaga from './main/main.sagas';
+import { rootReducer } from './root.reducer';
+
+const saga = createSagaMiddleware();
 
 export const store = configureStore({
-    reducer: { weatherReducer },
+    reducer: rootReducer,
+    middleware: [saga],
 });
+
+saga.run(weatherSaga);

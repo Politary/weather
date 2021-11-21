@@ -1,44 +1,61 @@
 import React from 'react';
 import {
+    FooterItem,
     Panel,
-    StyledWeatherCard,
-    TempContainer,
-    WeatherItem,
+    WeatherTypeContainer,
+    WeatherFooter,
+    WeatherHeader,
+    CurrentTemp,
+    WeatherStat,
 } from './WeatherCard.styles';
 
 export const WeatherCard = (props) => {
     const {
         location: {
             name,
+            data,
             weatherIcon,
             currentTemp,
             feelsLike,
             weather,
             windSpeed,
+            humidity,
         },
     } = props;
     return (
-        <StyledWeatherCard>
-            <Panel>
-                <p>Current weather</p>
-                <WeatherItem>{`City: ${name}`}</WeatherItem>
-                <WeatherItem>
-                    {weatherIcon ? (
-                        <img
-                            src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
-                            alt="weatherImage"
-                        />
-                    ) : null}
-                    <TempContainer>
-                        <div>{currentTemp}</div>
-                        <div>{`Feels like ${feelsLike}`}</div>
-                    </TempContainer>
-                </WeatherItem>
-                <p>{weather}</p>
-            </Panel>
-            <Panel>
-                <p>{`Wind speed ${windSpeed}`}</p>
-            </Panel>
-        </StyledWeatherCard>
+        <Panel>
+            <WeatherHeader>
+                <span>{`${name}`}</span>
+                <span>{data}</span>
+            </WeatherHeader>
+            <WeatherFooter>
+                <FooterItem>
+                    <CurrentTemp>{`${currentTemp}°`}</CurrentTemp>
+                    <WeatherTypeContainer>
+                        {weatherIcon ? (
+                            <img
+                                src={`http://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+                                alt="weatherImage"
+                            />
+                        ) : null}
+                        <span>{weather}</span>
+                    </WeatherTypeContainer>
+                </FooterItem>
+                <FooterItem>
+                    <WeatherStat>
+                        <span>Humidity:</span>
+                        <span>{`${humidity}%`}</span>
+                    </WeatherStat>
+                    <WeatherStat>
+                        <span>Wind:</span>
+                        <span>{`${windSpeed}km/h`}</span>
+                    </WeatherStat>
+                    <WeatherStat>
+                        <span>Feels like</span>
+                        <span>{` ${feelsLike}°`}</span>
+                    </WeatherStat>
+                </FooterItem>
+            </WeatherFooter>
+        </Panel>
     );
 };

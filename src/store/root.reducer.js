@@ -1,7 +1,6 @@
-// import { combineReducers } from 'redux';
-//
-// import { weatherReducer } from './main/main.reducers';
-//
-// export const rootReducer = combineReducers({
-//     main: weatherReducer,
-// });
+import { combineReducers } from '@reduxjs/toolkit';
+import weatherReducer from './main/main.slice';
+
+export const rootReducer = combineReducers({
+    weather: weatherReducer,
+});
