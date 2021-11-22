@@ -15,23 +15,21 @@ const weatherSlice = createSlice({
             humidity: null,
             isLoaded: false,
         },
-        isError: false,
+        state: 'idle',
         errorCode: null,
     },
     reducers: {
         getWeatherFetch: (state) => {
-            state.isLoading = true;
+            state.state = 'loading';
         },
         getWeatherSuccess: (state, action) => {
             state.location = action.payload;
-            state.isLoading = false;
-            state.isError = false;
+            state.state = 'loaded';
             state.errorCode = null;
         },
         getWeatherFailure: (state, action) => {
             console.log(action.payload.response.status);
-            state.isLoading = false;
-            state.isError = true;
+            state.state = 'error';
             state.errorCode = action.payload.response.status;
             state.location = {
                 name: '',

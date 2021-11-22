@@ -19,7 +19,6 @@ function* workGetWeatherFetch(action) {
             feelsLike: weatherData.data.list[0].main.feels_like,
             windSpeed: weatherData.data.list[0].wind.speed,
             humidity: weatherData.data.list[0].main.humidity,
-            isLoaded: true,
         };
         yield put(getWeatherSuccess(formattedWeatherData));
     } catch (error) {

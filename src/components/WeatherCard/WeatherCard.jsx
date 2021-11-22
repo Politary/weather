@@ -31,10 +31,10 @@ export const WeatherCard = (props) => {
             humidity,
             isLoaded,
         },
-        isError,
+        state,
         errorCode,
     } = props;
-    if (isError === false && errorCode === null && isLoaded) {
+    if (state === 'loaded' && errorCode === null) {
         return (
             <Panel>
                 <WeatherHeader>
@@ -75,14 +75,14 @@ export const WeatherCard = (props) => {
             </Panel>
         );
     }
-    if (isError === true && errorCode === 404) {
+    if (state === 'error' && errorCode === 404) {
         return (
             <ErrorWrapper>
                 <img src={Error} alt="error" />
                 <span>Sorry, there is no such city</span>
             </ErrorWrapper>
         );
-    } else if (isError === true)
+    } else if (state === 'error')
         return (
             <ErrorWrapper>
                 <img src={Error} alt="error" />

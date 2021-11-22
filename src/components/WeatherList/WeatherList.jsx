@@ -36,7 +36,7 @@ export const WeatherList = () => {
             <WeatherWrapper>
                 <WeatherCard
                     location={weather.location}
-                    isError={weather.isError}
+                    state={weather.state}
                     errorCode={weather.errorCode}
                 />
             </WeatherWrapper>
