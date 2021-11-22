@@ -33,19 +33,13 @@ export const WeatherList = () => {
                 <SearchBar handleInputChange={handleInputChange} />
                 <SearchButton handleSearch={handleSearch}>Search</SearchButton>
             </SearchWrapper>
-            {!weather.isError ? (
-                <WeatherWrapper
-                    name={weather.location.name}
-                    isLoading={weather.location.isLoading}
-                >
-                    <WeatherCard location={weather.location} />
-                </WeatherWrapper>
-            ) : (
-                <ErrorWrapper>
-                    <img src={Error} alt="error" />
-                    <span>Sorry, there is no such city</span>
-                </ErrorWrapper>
-            )}
+            <WeatherWrapper>
+                <WeatherCard
+                    location={weather.location}
+                    isError={weather.isError}
+                    errorCode={weather.errorCode}
+                />
+            </WeatherWrapper>
         </div>
     );
 };

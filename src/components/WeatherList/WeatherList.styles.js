@@ -4,7 +4,7 @@ export const WeatherWrapper = styled.div.attrs((props) => ({
     name: props.name,
     isLoading: props.isLoading,
 }))`
-    display: ${(props) =>
+    //display: ${(props) =>
         props.name === '' && !props.isLoading ? 'none' : 'flex'};
     border-radius: 6px;
 `;
