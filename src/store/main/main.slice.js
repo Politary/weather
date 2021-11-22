@@ -13,9 +13,10 @@ const weatherSlice = createSlice({
             weather: '',
             windSpeed: '',
             humidity: null,
+            isLoaded: false,
         },
-        isLoaded: false,
         isError: false,
+        errorCode: null,
     },
     reducers: {
         getWeatherFetch: (state) => {
@@ -25,11 +26,13 @@ const weatherSlice = createSlice({
             state.location = action.payload;
             state.isLoading = false;
             state.isError = false;
+            state.errorCode = null;
         },
         getWeatherFailure: (state, action) => {
+            console.log(action.payload.response.status);
             state.isLoading = false;
             state.isError = true;
-            console.log(action.payload);
+            state.errorCode = action.payload.response.status;
             state.location = {
                 name: '',
                 county: '',

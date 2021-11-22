@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeatherFetch } from '../../store/main/main.slice';
 
@@ -26,10 +26,6 @@ export const WeatherList = () => {
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
-
-    useEffect(() => {
-        console.log(weather.location.name);
-    }, [weather.location, inputValue]);
 
     return (
         <div>
