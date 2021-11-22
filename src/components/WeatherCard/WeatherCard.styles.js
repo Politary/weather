@@ -3,9 +3,8 @@ import styled from 'styled-components/macro';
 export const FooterItem = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
-    padding: 32px 24px;
+    padding: 24px;
     width: 50%;
     box-sizing: border-box;
     height: 100%;
@@ -15,6 +14,7 @@ export const FooterItem = styled.div`
     }
     :first-of-type {
         border-right: 1px solid #8ca4b3;
+        justify-content: space-between;
     }
 `;
 
@@ -45,6 +45,11 @@ export const WeatherStat = styled.div`
     font-size: 0.75rem;
     font-weight: 500;
     color: #8ca4b3;
+    padding-right: 32px;
+`;
+
+export const StatValue = styled.span`
+    color: #435865;
 `;
 
 export const CurrentTemp = styled.div`
@@ -59,6 +64,31 @@ export const WeatherTypeContainer = styled.div`
     display: flex;
     height: 100%;
     flex-direction: column;
+`;
+
+export const City = styled.span`
+    font-size: 14px;
+    font-weight: 600;
+    color: #435865; ;
+`;
+
+export const Country = styled.span`
+    font-size: 14px;
+    font-weight: 600;
+    color: #8ca4b3;
+    padding-left: 12px;
+`;
+
+export const Weather = styled.span`
+    font-size: 14px;
+    font-weight: 500;
+    color: #435865;
+`;
+
+export const Date = styled.span`
+    font-size: 14px;
+    font-weight: 600;
+    color: #8ca4b3;
 `;
 
 export const Panel = styled.div`

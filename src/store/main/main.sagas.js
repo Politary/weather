@@ -12,7 +12,8 @@ function* workGetWeatherFetch(action) {
         console.log(weatherData);
         const formattedWeatherData = {
             name: weatherData.data.city.name,
-            data: weatherData.data.list[0].dt_txt,
+            country: weatherData.data.city.country,
+            unixDate: Date.parse(weatherData.data.list[0].dt_txt),
             weather: weatherData.data.list[0].weather[0].main,
             weatherIcon: weatherData.data.list[0].weather[0].icon,
             currentTemp: weatherData.data.list[0].main.temp,

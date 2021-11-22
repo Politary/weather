@@ -7,13 +7,20 @@ import {
     WeatherHeader,
     CurrentTemp,
     WeatherStat,
+    StatValue,
+    Country,
+    Date,
+    City,
+    Weather,
 } from './WeatherCard.styles';
+import { unixDateToString } from '../../utils/utils';
 
 export const WeatherCard = (props) => {
     const {
         location: {
             name,
-            data,
+            country,
+            unixDate,
             weatherIcon,
             currentTemp,
             feelsLike,
@@ -25,8 +32,11 @@ export const WeatherCard = (props) => {
     return (
         <Panel>
             <WeatherHeader>
-                <span>{`${name}`}</span>
-                <span>{data}</span>
+                <div>
+                    <City>{name}</City>
+                    <Country>{country}</Country>
+                </div>
+                <Date>{unixDateToString(unixDate)}</Date>
             </WeatherHeader>
             <WeatherFooter>
                 <FooterItem>
@@ -38,21 +48,21 @@ export const WeatherCard = (props) => {
                                 alt="weatherImage"
                             />
                         ) : null}
-                        <span>{weather}</span>
+                        <Weather>{weather}</Weather>
                     </WeatherTypeContainer>
                 </FooterItem>
                 <FooterItem>
                     <WeatherStat>
                         <span>Humidity:</span>
-                        <span>{`${humidity}%`}</span>
+                        <StatValue>{`${humidity}%`}</StatValue>
                     </WeatherStat>
                     <WeatherStat>
                         <span>Wind:</span>
-                        <span>{`${windSpeed}km/h`}</span>
+                        <StatValue>{`${windSpeed}km/h`}</StatValue>
                     </WeatherStat>
                     <WeatherStat>
                         <span>Feels like</span>
-                        <span>{` ${feelsLike}°`}</span>
+                        <StatValue>{` ${feelsLike}°`}</StatValue>
                     </WeatherStat>
                 </FooterItem>
             </WeatherFooter>

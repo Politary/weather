@@ -5,7 +5,8 @@ const weatherSlice = createSlice({
     initialState: {
         location: {
             name: '',
-            data: '',
+            country: '',
+            unixDate: '',
             weatherIcon: null,
             currentTemp: '',
             feelsLike: '',
@@ -31,7 +32,8 @@ const weatherSlice = createSlice({
             console.log(action.payload);
             state.location = {
                 name: '',
-                data: '',
+                county: '',
+                unixDate: '',
                 weatherIcon: null,
                 currentTemp: '',
                 feelsLike: '',
