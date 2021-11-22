@@ -13,7 +13,6 @@ export const unixDateToString = (unixDate) => {
         'Friday',
         'Saturday',
     ];
-
     const monthName = [
         'Jan',
         'Feb',
@@ -28,7 +27,6 @@ export const unixDateToString = (unixDate) => {
         'Nov',
         'Dec',
     ];
-
     const formattedYear = year.toString().slice(-2);
 
     return `${weekday[day]}, ${monthName[month]} ${formattedYear}`;
