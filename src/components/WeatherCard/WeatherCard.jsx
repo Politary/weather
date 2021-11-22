@@ -29,7 +29,6 @@ export const WeatherCard = (props) => {
             weather,
             windSpeed,
             humidity,
-            isLoaded,
         },
         state,
         errorCode,

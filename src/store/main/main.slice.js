@@ -13,7 +13,6 @@ const weatherSlice = createSlice({
             weather: '',
             windSpeed: '',
             humidity: null,
-            isLoaded: false,
         },
         state: 'idle',
         errorCode: null,
@@ -41,7 +40,6 @@ const weatherSlice = createSlice({
                 weather: '',
                 windSpeed: '',
                 humidity: null,
-                isLoaded: false,
             };
         },
     },

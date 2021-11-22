@@ -3,14 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWeatherFetch } from '../../store/main/main.slice';
 
 import { SearchBar } from '../SearchBar/SearchBar';
-import {
-    ErrorWrapper,
-    SearchWrapper,
-    WeatherWrapper,
-} from './WeatherList.styles';
+import { SearchWrapper, WeatherWrapper } from './WeatherList.styles';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
-import Error from '../../images/icons/Error.svg';
 
 export const WeatherList = () => {
     const dispatch = useDispatch();
