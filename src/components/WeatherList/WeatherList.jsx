@@ -18,7 +18,9 @@ export const WeatherList = () => {
     const [inputValue, setInputValue] = useState('Moscow');
 
     const handleSearch = () => {
-        dispatch(getWeatherFetch(inputValue));
+        if (inputValue.trim()) {
+            dispatch(getWeatherFetch(inputValue));
+        }
     };
 
     const handleInputChange = (e) => {
