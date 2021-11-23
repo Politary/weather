@@ -25,7 +25,10 @@ export const WeatherList = () => {
     return (
         <div>
             <SearchWrapper>
-                <SearchBar handleInputChange={handleInputChange} />
+                <SearchBar
+                    handleInputChange={handleInputChange}
+                    handleSearch={handleSearch}
+                />
                 <SearchButton handleSearch={handleSearch}>Search</SearchButton>
             </SearchWrapper>
             <WeatherWrapper>
