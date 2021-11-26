@@ -10,7 +10,7 @@ import { SearchButton } from '../SearchButton/SearchButton';
 export const WeatherList = () => {
     const dispatch = useDispatch();
     const weather = useSelector((state) => state.weather);
-    const [inputValue, setInputValue] = useState('Moscow');
+    const [inputValue, setInputValue] = useState('');
 
     const handleSearch = () => {
         if (inputValue.trim()) {

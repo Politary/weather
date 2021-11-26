@@ -13,7 +13,6 @@ export const SearchBar = ({ handleInputChange, handleSearch }) => {
             placeholder="Search by city name"
             onChange={handleInputChange}
             onKeyDown={handleInputSubmit}
-            defaultValue="Moscow"
         />
     );
 };
