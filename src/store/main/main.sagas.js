@@ -9,6 +9,7 @@ function* workGetWeatherFetch(action) {
                 `https://api.openweathermap.org/data/2.5/forecast?q=${action.payload}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
             )
         );
+        console.log(weatherData);
         const formattedWeatherData = {
             name: weatherData.data.city.name,
             country: weatherData.data.city.country,
@@ -20,6 +21,7 @@ function* workGetWeatherFetch(action) {
             windSpeed: weatherData.data.list[0].wind.speed,
             humidity: weatherData.data.list[0].main.humidity,
         };
+        console.log(formattedWeatherData);
         yield put(getWeatherSuccess(formattedWeatherData));
     } catch (error) {
         yield put(getWeatherFailure(error));

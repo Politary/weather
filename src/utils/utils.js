@@ -1,7 +1,7 @@
 export const unixDateToString = (unixDate) => {
     let date = new Date(unixDate);
-    const year = date.getFullYear();
     const day = date.getDay();
+    const dayNum = date.getDate();
     const month = date.getMonth();
 
     const weekday = [
@@ -27,7 +27,6 @@ export const unixDateToString = (unixDate) => {
         'Nov',
         'Dec',
     ];
-    const formattedYear = year.toString().slice(-2);
 
-    return `${weekday[day]}, ${monthName[month]} ${formattedYear}`;
+    return `${weekday[day]}, ${monthName[month]} ${dayNum}`;
 };
