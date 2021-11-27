@@ -62,6 +62,7 @@ export const CurrentTemp = styled.div`
 
 export const WeatherTypeContainer = styled.div`
     display: flex;
+    align-items: center;
     height: 100%;
     flex-direction: column;
 `;
