@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledSearchBar } from './SearchBar.styles';
 
-export const SearchBar = ({ handleInputChange, handleSearch }) => {
+export const SearchBar = ({ handleInputChange, handleSearch, inputValue }) => {
     const handleInputSubmit = (e) => {
         if (e.code === 'Enter') {
             handleSearch();
@@ -13,6 +13,7 @@ export const SearchBar = ({ handleInputChange, handleSearch }) => {
             placeholder="Search by city name"
             onChange={handleInputChange}
             onKeyDown={handleInputSubmit}
+            value={inputValue}
         />
     );
 };

@@ -13,8 +13,9 @@ export const WeatherList = () => {
     const [inputValue, setInputValue] = useState('');
 
     const handleSearch = () => {
-        if (inputValue.trim()) {
+        if (inputValue.trim() && weather.state !== 'loading') {
             dispatch(getWeatherFetch(inputValue));
+            setInputValue('');
         }
     };
 
@@ -28,6 +29,7 @@ export const WeatherList = () => {
                 <SearchBar
                     handleInputChange={handleInputChange}
                     handleSearch={handleSearch}
+                    inputValue={inputValue}
                 />
                 <SearchButton handleSearch={handleSearch}>Search</SearchButton>
             </SearchWrapper>
