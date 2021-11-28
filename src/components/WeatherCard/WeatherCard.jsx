@@ -88,5 +88,5 @@ export const WeatherCard = (props) => {
                 <span>{`Error ${errorCode} occurred :(`}</span>
             </ErrorWrapper>
         );
-    else return <Panel></Panel>;
+    else return <Panel />;
 };
