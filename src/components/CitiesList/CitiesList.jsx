@@ -1,13 +1,23 @@
 import React from 'react';
+import { StyledCitiesList } from './CitiesList.styles';
+import { ListItem } from '../ListItem/ListItem';
 
-export const CitiesList = ({ filteredCities, inputValue }) => {
+export const CitiesList = ({
+    filteredCities,
+    inputValue,
+    searchBarPosition,
+}) => {
     if (filteredCities && inputValue)
         return (
-            <ul>
+            <StyledCitiesList searchBarPosition={searchBarPosition}>
                 {filteredCities.slice(0, 5).map((city) => (
-                    <li key={city.id}>{city.name}</li>
+                    <ListItem
+                        key={city.id}
+                        name={city.name}
+                        country={city.country}
+                    />
                 ))}
-            </ul>
+            </StyledCitiesList>
         );
     else return <div />;
 };

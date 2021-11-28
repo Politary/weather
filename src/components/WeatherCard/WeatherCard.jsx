@@ -73,8 +73,7 @@ export const WeatherCard = (props) => {
                 </WeatherFooter>
             </Panel>
         );
-    }
-    if (state === 'error' && errorCode === 404) {
+    } else if (state === 'error' && errorCode === 404) {
         return (
             <ErrorWrapper>
                 <img src={Error} alt="error" />
