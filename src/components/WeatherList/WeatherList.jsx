@@ -32,7 +32,9 @@ export const WeatherList = () => {
         );
     };
 
-    useEffect(() => {});
+    useEffect(() => {
+        console.log(filteredCities);
+    });
 
     return (
         <div>
