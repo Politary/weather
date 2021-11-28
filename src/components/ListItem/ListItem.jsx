@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyledListItem, Item } from './ListItem.styles';
 
-export const ListItem = ({ name, country }) => {
+export const ListItem = ({ name, country, id }) => {
     return (
         <StyledListItem>
-            <a href={'/'}>
+            <button value={id} onClick={() => console.log(id)}>
                 <Item>{name}</Item>
                 <Item>{country}</Item>
-            </a>
+            </button>
         </StyledListItem>
     );
 };

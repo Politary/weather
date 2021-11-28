@@ -17,9 +17,9 @@ export const WeatherList = () => {
     const [filteredCities, setFilteredCities] = useState([]);
     const [searchBarPosition, setSearchBarPosition] = useState([]);
 
-    const handleSearch = () => {
-        if (inputValue.trim() && weather.state !== 'loading') {
-            dispatch(getWeatherFetch(inputValue));
+    const handleSearch = (value) => {
+        if (value.trim() && weather.state !== 'loading') {
+            dispatch(getWeatherFetch(value));
             setInputValue('');
         }
     };
@@ -56,7 +56,12 @@ export const WeatherList = () => {
                     inputValue={inputValue}
                     handleSearchBarMount={handleSearchBarMount}
                 />
-                <SearchButton handleSearch={handleSearch}>Search</SearchButton>
+                <SearchButton
+                    handleSearch={handleSearch}
+                    inputValue={inputValue}
+                >
+                    Search
+                </SearchButton>
             </SearchWrapper>
             <WeatherWrapper>
                 <WeatherCard

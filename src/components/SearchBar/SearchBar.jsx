@@ -13,7 +13,7 @@ export const SearchBar = ({
     }, [handleSearchBarMount]);
     const handleInputSubmit = (e) => {
         if (e.code === 'Enter') {
-            handleSearch();
+            handleSearch(inputValue);
         }
     };
     return (

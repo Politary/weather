@@ -4,10 +4,12 @@ export const StyledListItem = styled.li`
     height: 65px;
     background: transparent;
     border-bottom: 1px solid #8ca4b3;
-    a {
+    button {
+        cursor: pointer;
+        border: none;
+        background: transparent;
         display: flex;
         align-items: center;
-        text-decoration: none;
         width: 100%;
         height: 100%;
         color: #435865;

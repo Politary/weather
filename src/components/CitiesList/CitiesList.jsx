@@ -15,6 +15,7 @@ export const CitiesList = ({
                         key={city.id}
                         name={city.name}
                         country={city.country}
+                        id={city.id}
                     />
                 ))}
             </StyledCitiesList>
