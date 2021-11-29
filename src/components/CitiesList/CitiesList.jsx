@@ -6,16 +6,18 @@ export const CitiesList = ({
     filteredCities,
     inputValue,
     searchBarPosition,
+    handleSearch,
 }) => {
     if (filteredCities && inputValue)
         return (
             <StyledCitiesList searchBarPosition={searchBarPosition}>
-                {filteredCities.slice(0, 5).map((city) => (
+                {filteredCities.slice(0, 10).map((city) => (
                     <ListItem
                         key={city.id}
                         name={city.name}
                         country={city.country}
                         id={city.id}
+                        handleSearch={handleSearch}
                     />
                 ))}
             </StyledCitiesList>

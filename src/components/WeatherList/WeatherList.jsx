@@ -17,8 +17,13 @@ export const WeatherList = () => {
     const [filteredCities, setFilteredCities] = useState([]);
     const [searchBarPosition, setSearchBarPosition] = useState([]);
 
+    const handleSearchByName = () => {
+        if (inputValue.trim && typeof inputValue === 'string')
+            handleSearch(inputValue);
+    };
+
     const handleSearch = (value) => {
-        if (value.trim() && weather.state !== 'loading') {
+        if (weather.state !== 'loading') {
             dispatch(getWeatherFetch(value));
             setInputValue('');
         }
@@ -33,7 +38,9 @@ export const WeatherList = () => {
     const filterCities = () => {
         setFilteredCities(
             citiesList.filter((city) => {
-                return city.name.includes(inputValue);
+                return city.name
+                    .toLowerCase()
+                    .includes(inputValue.toLowerCase());
             })
         );
     };
@@ -52,12 +59,12 @@ export const WeatherList = () => {
             <SearchWrapper>
                 <SearchBar
                     handleInputChange={handleInputChange}
-                    handleSearch={handleSearch}
+                    handleSearch={handleSearchByName}
                     inputValue={inputValue}
                     handleSearchBarMount={handleSearchBarMount}
                 />
                 <SearchButton
-                    handleSearch={handleSearch}
+                    handleSearch={handleSearchByName}
                     inputValue={inputValue}
                 >
                     Search
@@ -74,6 +81,7 @@ export const WeatherList = () => {
                 filteredCities={filteredCities}
                 inputValue={inputValue}
                 searchBarPosition={searchBarPosition}
+                handleSearch={handleSearch}
             />
         </div>
     );

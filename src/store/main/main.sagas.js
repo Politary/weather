@@ -4,12 +4,20 @@ import { getWeatherSuccess, getWeatherFailure } from './main.slice';
 
 function* workGetWeatherFetch(action) {
     try {
-        const weatherData = yield call(() =>
-            axios.get(
-                `https://api.openweathermap.org/data/2.5/forecast?q=${action.payload}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
-            )
-        );
-        console.log(weatherData);
+        let weatherData = {};
+        if (typeof action.payload === 'string') {
+            weatherData = yield call(() =>
+                axios.get(
+                    `https://api.openweathermap.org/data/2.5/forecast?q=${action.payload}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
+                )
+            );
+        } else if (Number.isInteger(action.payload)) {
+            weatherData = yield call(() =>
+                axios.get(
+                    `https://api.openweathermap.org/data/2.5/forecast?id=${action.payload}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
+                )
+            );
+        }
         const formattedWeatherData = {
             name: weatherData.data.city.name,
             country: weatherData.data.city.country,

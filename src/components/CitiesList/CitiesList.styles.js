@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 
 export const StyledCitiesList = styled.ul`
     position: fixed;
+    background-color: #eff5f9;
     list-style-type: none;
     padding: 0;
     margin: 0;
