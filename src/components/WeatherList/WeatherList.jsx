@@ -18,8 +18,7 @@ export const WeatherList = () => {
     const [searchBarPosition, setSearchBarPosition] = useState([]);
 
     const handleSearchByName = () => {
-        if (inputValue.trim && typeof inputValue === 'string')
-            handleSearch(inputValue);
+        if (inputValue !== '') handleSearch(inputValue);
     };
 
     const handleSearch = (value) => {

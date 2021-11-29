@@ -4,6 +4,8 @@ export const StyledListItem = styled.li`
     height: 65px;
     background: transparent;
     border-bottom: 1px solid #8ca4b3;
+    color: #435865;
+    font-weight: 500;
     button {
         cursor: pointer;
         border: none;
@@ -13,6 +15,8 @@ export const StyledListItem = styled.li`
         width: 100%;
         height: 100%;
         color: #435865;
+        font-size: 14px;
+        font-family: 'Inter', sans-serif;
     }
 `;
 
