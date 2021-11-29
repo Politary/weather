@@ -7,7 +7,7 @@ import { SearchWrapper, WeatherWrapper } from './WeatherList.styles';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
 
-import citiesList from '../../json/city.list.min.json';
+import citiesList from '../../city.list.min.json';
 import { CitiesList } from '../CitiesList/CitiesList';
 
 export const WeatherList = () => {
