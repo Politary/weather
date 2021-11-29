@@ -4,7 +4,7 @@ export const StyledCitiesList = styled.ul`
     position: fixed;
     background-color: #eff5f9;
     list-style-type: none;
-    padding: 0;
+    padding: 5px;
     margin: 0;
     top: ${(props) =>
         props.searchBarPosition.top + props.searchBarPosition.height + 'px'};
