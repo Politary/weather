@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeatherFetch } from '../../store/main/main.slice';
 
@@ -48,10 +48,6 @@ export const WeatherList = () => {
         setInputValue(e.target.value);
         filterCities();
     };
-
-    useEffect(() => {
-        console.log(filteredCities);
-    }, [filteredCities]);
 
     return (
         <div>
