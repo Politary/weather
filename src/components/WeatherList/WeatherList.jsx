@@ -6,6 +6,7 @@ import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchWrapper, WeatherWrapper } from './WeatherList.styles';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
+
 import citiesList from '../../json/city.list.min.json';
 import { CitiesList } from '../CitiesList/CitiesList';
 
