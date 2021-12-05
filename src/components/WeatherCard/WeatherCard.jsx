@@ -29,11 +29,11 @@ export const WeatherCard = (props) => {
             weather,
             windSpeed,
             humidity,
+            status,
+            errorCode,
         },
-        state,
-        errorCode,
     } = props;
-    if (state === 'loaded' && errorCode === null) {
+    if (status === 'loaded' && errorCode === null) {
         return (
             <Panel>
                 <WeatherHeader>
@@ -73,14 +73,14 @@ export const WeatherCard = (props) => {
                 </WeatherFooter>
             </Panel>
         );
-    } else if (state === 'error' && errorCode === 404) {
+    } else if (status === 'error' && errorCode === 404) {
         return (
             <ErrorWrapper>
                 <img src={Error} alt="error" />
                 <span>Sorry, there is no such city</span>
             </ErrorWrapper>
         );
-    } else if (state === 'error')
+    } else if (status === 'error')
         return (
             <ErrorWrapper>
                 <img src={Error} alt="error" />

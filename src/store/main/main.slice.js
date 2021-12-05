@@ -13,26 +13,38 @@ const weatherSlice = createSlice({
             weather: '',
             windSpeed: '',
             humidity: null,
+            status: 'idle',
+            errorCode: null,
         },
-        state: 'idle',
-        errorCode: null,
+        autocompleteList: {
+            status: '',
+        },
     },
     reducers: {
+        getAutoCompleteListFetch: (state) => {
+            state.autocompleteList.status = 'loading';
+        },
+        getAutoCompleteListSuccess: (state, action) => {
+            state.autocompleteList.status = 'loaded';
+            console.log(action.payload);
+        },
+        getAutoCompleteListFailure: (state, action) => {
+            state.autocompleteList.status = 'error';
+            console.log(action.payload);
+        },
         getWeatherFetch: (state) => {
-            state.state = 'loading';
+            state.location.status = 'loading';
         },
         getWeatherSuccess: (state, action) => {
             state.location = action.payload;
-            state.state = 'loaded';
-            state.errorCode = null;
+            state.location.status = 'loaded';
+            state.location.errorCode = null;
         },
         getWeatherFailure: (state, action) => {
             console.log(action.payload.response.status);
-            state.state = 'error';
-            state.errorCode = action.payload.response.status;
             state.location = {
                 name: '',
-                county: '',
+                country: '',
                 unixDate: '',
                 weatherIcon: null,
                 currentTemp: '',
@@ -40,11 +52,18 @@ const weatherSlice = createSlice({
                 weather: '',
                 windSpeed: '',
                 humidity: null,
+                status: 'error',
+                errorCode: action.payload.response.status,
             };
         },
     },
 });
 
 export default weatherSlice.reducer;
-export const { getWeatherFetch, getWeatherSuccess, getWeatherFailure } =
-    weatherSlice.actions;
+export const {
+    getAutoCompleteListFetch,
+    getAutoCompleteListSuccess,
+    getWeatherFetch,
+    getWeatherSuccess,
+    getWeatherFailure,
+} = weatherSlice.actions;

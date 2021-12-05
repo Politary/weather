@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWeatherFetch } from '../../store/main/main.slice';
+import {
+    getAutoCompleteListFetch,
+    getWeatherFetch,
+} from '../../store/main/main.slice';
 
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchWrapper, WeatherWrapper } from './WeatherList.styles';
@@ -29,6 +32,7 @@ export const WeatherList = () => {
     };
 
     const handleSearchBarMount = useCallback((ref) => {
+        console.log('handlesEARCHbARmOUNT');
         if (ref.current) {
             setSearchBarPosition(ref.current.getBoundingClientRect());
         }
@@ -47,6 +51,7 @@ export const WeatherList = () => {
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
         filterCities();
+        dispatch(getAutoCompleteListFetch(e.target.value));
     };
 
     return (
@@ -66,11 +71,7 @@ export const WeatherList = () => {
                 </SearchButton>
             </SearchWrapper>
             <WeatherWrapper>
-                <WeatherCard
-                    location={weather.location}
-                    state={weather.state}
-                    errorCode={weather.errorCode}
-                />
+                <WeatherCard location={weather.location} />
             </WeatherWrapper>
             <CitiesList
                 filteredCities={filteredCities}

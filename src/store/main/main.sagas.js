@@ -1,6 +1,12 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import { getWeatherSuccess, getWeatherFailure } from './main.slice';
+import {
+    getAutoCompleteListFetch,
+    getAutoCompleteListSuccess,
+    getWeatherSuccess,
+    getWeatherFailure,
+    getWeatherFetch,
+} from './main.slice';
 
 function* workGetWeatherFetch(action) {
     try {
@@ -35,8 +41,16 @@ function* workGetWeatherFetch(action) {
     }
 }
 
-function* weatherSaga() {
-    yield takeEvery('weather/getWeatherFetch', workGetWeatherFetch);
+function* workGetAutoCompleteListFetch() {
+    yield put(getAutoCompleteListSuccess('success'));
 }
 
+function* weatherSaga() {
+    yield takeEvery(getWeatherFetch, workGetWeatherFetch);
+    yield takeEvery(getAutoCompleteListFetch, workGetAutoCompleteListFetch);
+}
+
+// function* autoCompleteSaga() {
+//     yield takeEvery(getAutoCompleteListFetch, workGetAutoCompleteListFetch);
+// }
 export default weatherSaga;
