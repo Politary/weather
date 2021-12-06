@@ -18,11 +18,15 @@ export const WeatherList = () => {
     const [inputValue, setInputValue] = useState('');
     const [searchBarPosition, setSearchBarPosition] = useState([]);
 
-    const handleSearch = () => {
+    const handleSearchByName = () => {
+        if (weather.autocompleteList.cities) {
+            handleSearch(weather.autocompleteList.cities[0].coordinates);
+        }
+    };
+
+    const handleSearch = (coordinates) => {
         if (weather.autocompleteList.cities[0]) {
-            dispatch(
-                getWeatherFetch(weather.autocompleteList.cities[0].coordinates)
-            );
+            dispatch(getWeatherFetch(coordinates));
             dispatch(clearAutoCompleteList());
             setInputValue('');
         }
@@ -48,12 +52,12 @@ export const WeatherList = () => {
             <SearchWrapper>
                 <SearchBar
                     handleInputChange={handleInputChange}
-                    handleSearch={handleSearch}
+                    handleSearch={handleSearchByName}
                     inputValue={inputValue}
                     handleSearchBarMount={handleSearchBarMount}
                 />
                 <SearchButton
-                    handleSearch={handleSearch}
+                    handleSearch={handleSearchByName}
                     inputValue={inputValue}
                 >
                     Search

@@ -15,6 +15,7 @@ export const CitiesList = ({
                     <ListItem
                         key={city.name + city.country_name}
                         name={city.name}
+                        coordinates={city.coordinates}
                         handleSearch={handleSearch}
                     />
                 ))}
