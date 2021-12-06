@@ -1,32 +1,29 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     getAutoCompleteListFetch,
     getWeatherFetch,
+    clearAutoCompleteList,
 } from '../../store/main/main.slice';
 
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchWrapper, WeatherWrapper } from './WeatherList.styles';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import { SearchButton } from '../SearchButton/SearchButton';
-
-import citiesList from '../../json/city.list.min.json';
 import { CitiesList } from '../CitiesList/CitiesList';
 
 export const WeatherList = () => {
     const dispatch = useDispatch();
     const weather = useSelector((state) => state.weather);
     const [inputValue, setInputValue] = useState('');
-    const [filteredCities, setFilteredCities] = useState([]);
     const [searchBarPosition, setSearchBarPosition] = useState([]);
 
-    const handleSearchByName = () => {
-        if (inputValue !== '') handleSearch(inputValue);
-    };
-
-    const handleSearch = (value) => {
-        if (weather.state !== 'loading') {
-            dispatch(getWeatherFetch(value));
+    const handleSearch = () => {
+        if (weather.autocompleteList.cities[0]) {
+            dispatch(
+                getWeatherFetch(weather.autocompleteList.cities[0].coordinates)
+            );
+            dispatch(clearAutoCompleteList());
             setInputValue('');
         }
     };
@@ -38,33 +35,25 @@ export const WeatherList = () => {
         }
     }, []);
 
-    const filterCities = () => {
-        setFilteredCities(
-            citiesList.filter((city) => {
-                return city.name
-                    .toLowerCase()
-                    .includes(inputValue.toLowerCase());
-            })
-        );
-    };
-
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
-        filterCities();
-        dispatch(getAutoCompleteListFetch(e.target.value));
     };
+
+    useEffect(() => {
+        if (inputValue.trim()) dispatch(getAutoCompleteListFetch(inputValue));
+    }, [inputValue, dispatch]);
 
     return (
         <div>
             <SearchWrapper>
                 <SearchBar
                     handleInputChange={handleInputChange}
-                    handleSearch={handleSearchByName}
+                    handleSearch={handleSearch}
                     inputValue={inputValue}
                     handleSearchBarMount={handleSearchBarMount}
                 />
                 <SearchButton
-                    handleSearch={handleSearchByName}
+                    handleSearch={handleSearch}
                     inputValue={inputValue}
                 >
                     Search
@@ -74,7 +63,7 @@ export const WeatherList = () => {
                 <WeatherCard location={weather.location} />
             </WeatherWrapper>
             <CitiesList
-                filteredCities={filteredCities}
+                weather={weather}
                 inputValue={inputValue}
                 searchBarPosition={searchBarPosition}
                 handleSearch={handleSearch}

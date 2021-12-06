@@ -3,20 +3,18 @@ import { StyledCitiesList } from './CitiesList.styles';
 import { ListItem } from '../ListItem/ListItem';
 
 export const CitiesList = ({
-    filteredCities,
+    weather,
     inputValue,
     searchBarPosition,
     handleSearch,
 }) => {
-    if (filteredCities && inputValue)
+    if (weather.autocompleteList.cities && inputValue)
         return (
             <StyledCitiesList searchBarPosition={searchBarPosition}>
-                {filteredCities.slice(0, 10).map((city) => (
+                {weather.autocompleteList.cities.map((city) => (
                     <ListItem
-                        key={city.id}
+                        key={city.name + city.country_name}
                         name={city.name}
-                        country={city.country}
-                        id={city.id}
                         handleSearch={handleSearch}
                     />
                 ))}

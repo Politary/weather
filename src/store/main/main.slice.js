@@ -18,6 +18,7 @@ const weatherSlice = createSlice({
         },
         autocompleteList: {
             status: '',
+            cities: [],
         },
     },
     reducers: {
@@ -27,10 +28,14 @@ const weatherSlice = createSlice({
         getAutoCompleteListSuccess: (state, action) => {
             state.autocompleteList.status = 'loaded';
             console.log(action.payload);
+            state.autocompleteList.cities = action.payload;
         },
         getAutoCompleteListFailure: (state, action) => {
             state.autocompleteList.status = 'error';
             console.log(action.payload);
+        },
+        clearAutoCompleteList: (state) => {
+            state.autocompleteList.cities = [];
         },
         getWeatherFetch: (state) => {
             state.location.status = 'loading';
@@ -63,6 +68,8 @@ export default weatherSlice.reducer;
 export const {
     getAutoCompleteListFetch,
     getAutoCompleteListSuccess,
+    getAutoCompleteListFailure,
+    clearAutoCompleteList,
     getWeatherFetch,
     getWeatherSuccess,
     getWeatherFailure,

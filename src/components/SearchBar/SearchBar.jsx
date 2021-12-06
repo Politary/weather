@@ -8,14 +8,17 @@ export const SearchBar = ({
     handleSearchBarMount,
 }) => {
     const ref = useRef();
+
     useEffect(() => {
         handleSearchBarMount(ref);
     }, [handleSearchBarMount]);
+
     const handleInputSubmit = (e) => {
         if (e.code === 'Enter') {
             handleSearch();
         }
     };
+
     return (
         <StyledSearchBar
             ref={ref}

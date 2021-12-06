@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
     getAutoCompleteListFetch,
     getAutoCompleteListSuccess,
+    getAutoCompleteListFailure,
     getWeatherSuccess,
     getWeatherFailure,
     getWeatherFetch,
@@ -10,20 +11,11 @@ import {
 
 function* workGetWeatherFetch(action) {
     try {
-        let weatherData = {};
-        if (typeof action.payload === 'string') {
-            weatherData = yield call(() =>
-                axios.get(
-                    `https://api.openweathermap.org/data/2.5/forecast?q=${action.payload}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
-                )
-            );
-        } else if (Number.isInteger(action.payload)) {
-            weatherData = yield call(() =>
-                axios.get(
-                    `https://api.openweathermap.org/data/2.5/forecast?id=${action.payload}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
-                )
-            );
-        }
+        const weatherData = yield call(() =>
+            axios.get(
+                `https://api.openweathermap.org/data/2.5/forecast?lat=${action.payload.lat}&lon=${action.payload.lon}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
+            )
+        );
         const formattedWeatherData = {
             name: weatherData.data.city.name,
             country: weatherData.data.city.country,
@@ -41,8 +33,19 @@ function* workGetWeatherFetch(action) {
     }
 }
 
-function* workGetAutoCompleteListFetch() {
-    yield put(getAutoCompleteListSuccess('success'));
+function* workGetAutoCompleteListFetch(action) {
+    try {
+        const autocompleteList = yield call(() =>
+            axios.get(
+                `http://autocomplete.travelpayouts.com/places2?term=${action.payload}&locale=ru&types[]=city`
+            )
+        );
+        yield put(
+            getAutoCompleteListSuccess(autocompleteList.data.slice(0, 5))
+        );
+    } catch (error) {
+        yield put(getAutoCompleteListFailure(error));
+    }
 }
 
 function* weatherSaga() {
@@ -50,7 +53,4 @@ function* weatherSaga() {
     yield takeEvery(getAutoCompleteListFetch, workGetAutoCompleteListFetch);
 }
 
-// function* autoCompleteSaga() {
-//     yield takeEvery(getAutoCompleteListFetch, workGetAutoCompleteListFetch);
-// }
 export default weatherSaga;
