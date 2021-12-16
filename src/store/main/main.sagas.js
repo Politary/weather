@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { weatherApi, autocompleteApi } from '../../core/axios';
 import axios from 'axios';
 import {
     getAutoCompleteListFetch,
@@ -12,8 +13,8 @@ import {
 function* workGetWeatherFetch(action) {
     try {
         const weatherData = yield call(() =>
-            axios.get(
-                `https://api.openweathermap.org/data/2.5/forecast?lat=${action.payload.lat}&lon=${action.payload.lon}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
+            weatherApi.get(
+                `forecast?lat=${action.payload.lat}&lon=${action.payload.lon}&units=metric&lang=russian&appid=c53bf3e244553ba293bc4ff420dc8478`
             )
         );
         const formattedWeatherData = {
@@ -36,8 +37,8 @@ function* workGetWeatherFetch(action) {
 function* workGetAutoCompleteListFetch(action) {
     try {
         const autocompleteList = yield call(() =>
-            axios.get(
-                `http://autocomplete.travelpayouts.com/places2?term=${action.payload}&locale=ru&types[]=city`
+            autocompleteApi.get(
+                `places2?term=${action.payload}&locale=ru&types[]=city`
             )
         );
         yield put(
