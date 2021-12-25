@@ -37,7 +37,7 @@ function* workGetAutoCompleteListFetch(action) {
     try {
         const autocompleteList = yield call(() =>
             axios.get(
-                `http://autocomplete.travelpayouts.com/places2?term=${action.payload}&locale=ru&types[]=city`
+                `https://autocomplete.travelpayouts.com/places2?term=${action.payload}&locale=ru&types[]=city`
             )
         );
         yield put(

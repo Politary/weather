@@ -19,7 +19,7 @@ export const WeatherList = () => {
     const [searchBarPosition, setSearchBarPosition] = useState([]);
 
     const handleSearchByName = () => {
-        if (weather.autocompleteList.cities) {
+        if (weather.autocompleteList.cities[0]) {
             handleSearch(weather.autocompleteList.cities[0].coordinates);
         }
     };
