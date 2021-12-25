@@ -1,6 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { weatherApi, autocompleteApi } from '../../core/axios';
-import axios from 'axios';
 import {
     getAutoCompleteListFetch,
     getAutoCompleteListSuccess,
